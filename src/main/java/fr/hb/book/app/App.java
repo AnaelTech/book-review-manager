@@ -1,10 +1,10 @@
 package fr.hb.book.app;
 
-/**
- * Hello world!
- */
+import fr.hb.book.service.ReviewService;
+
 public class App {
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-    }
+  public static void main(String[] args) {
+    ReviewService reviewService = new ReviewService();
+    reviewService.displayReviewsByAuthorSortedByDateDesc("Alice");
+  }
 }

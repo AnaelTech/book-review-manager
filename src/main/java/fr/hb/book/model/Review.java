@@ -58,4 +58,9 @@ public class Review {
     this.book_id = book_id;
   }
 
+  @Override
+  public String toString() {
+    return "Review [book_id=" + book_id + ", pseudo=" + pseudo + ", note=" + note + ", commentaire=" + commentaire
+        + ", date=" + date + "]";
+  }
 }

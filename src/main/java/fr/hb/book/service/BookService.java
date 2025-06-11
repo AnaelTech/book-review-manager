@@ -1,6 +1,16 @@
 package fr.hb.book.service;
 
+import java.util.List;
+
+import fr.hb.book.model.Book;
+import fr.hb.book.model.Review;
+
+import fr.hb.book.data.FakeDatabase;
+
 public class BookService {
+
+  private List<Book> books = FakeDatabase.getBooks();
+  private List<Review> reviews = FakeDatabase.getReviews();
 
   /**
    * Displays the list of books sorted by average rating.
@@ -8,6 +18,10 @@ public class BookService {
    * @param books the list of books
    */
   public void displayBooksSortedByAverageRating() {
+    books.stream();
+    // Trier par note moyenne
+
+    // Afficher les données
 
   }
 
@@ -17,7 +31,9 @@ public class BookService {
    * @param books the list of books
    */
   public void findBestBooksByGenre() {
-
+    books.stream();
+    // Trier par note moyenne
+    // Et Sortir le meilleur genre
   }
 
   /**
@@ -26,7 +42,9 @@ public class BookService {
    * @param books the list of books
    */
   public void filterBooksPublishedBeforeYearAndShowReviews() {
-
+    books.stream();
+    // Filtrer les livres publiés avant une année
+    // Afficher les critiques
   }
 
   /**
@@ -36,7 +54,9 @@ public class BookService {
    * @param books the list of books
    */
   public void groupBooksByGenreAndShowCountAndAverageRating() {
-
+    books.stream();
+    // Grouper les livres par genre
+    // Afficher le nombre de livres et la moyenne
   }
 
 }
