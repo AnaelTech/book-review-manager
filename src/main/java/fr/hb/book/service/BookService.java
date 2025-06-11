@@ -1,6 +1,7 @@
 package fr.hb.book.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import fr.hb.book.model.Book;
 import fr.hb.book.model.Review;
@@ -19,6 +20,8 @@ public class BookService {
    */
   public void displayBooksSortedByAverageRating() {
     books.stream();
+    // Rechercher la note moyenne de chaque livre dasns la liste de reviews
+
     // Trier par note moyenne
 
     // Afficher les données
@@ -26,7 +29,7 @@ public class BookService {
   }
 
   /**
-   * Find the best books by genre.
+   * Find the best books by genre with the best average rating.
    * 
    * @param books the list of books
    */
@@ -39,11 +42,22 @@ public class BookService {
   /**
    * Filters the books published before a certain year and displays their reviews.
    * 
-   * @param books the list of books
+   * @param année
    */
-  public void filterBooksPublishedBeforeYearAndShowReviews() {
-    books.stream();
-    // Filtrer les livres publiés avant une année
+  public void filterBooksPublishedBeforeYearAndShowReviews(int year) {
+    books.stream()
+        .filter(book -> book.getYear() < year)
+        .forEach(book -> {
+          System.out.println("==================================================================");
+          System.out.println(" ");
+          System.out.println(book.getTitle() + " " + book.getYear());
+          reviews.stream()
+              .filter(review -> review.getBook_id() == book.getId())
+              .forEach(
+                  review -> System.out.println("  - " + review.getCommentaire()));
+        });
+
+    // Filtrer les livres publiés avant une année ✅
     // Afficher les critiques
   }
 
@@ -54,9 +68,19 @@ public class BookService {
    * @param books the list of books
    */
   public void groupBooksByGenreAndShowCountAndAverageRating() {
-    books.stream();
-    // Grouper les livres par genre
-    // Afficher le nombre de livres et la moyenne
+    books.stream()
+        .collect(Collectors.groupingBy(Book::getGenre))
+        .forEach((genre, books) -> {
+          System.out.println(genre + " : " + books.size() + " livres");
+          reviews.stream()
+              .filter(review -> review.getBook_id() == books.get(0).getId())
+              .mapToDouble(review -> review.getNote())
+              .average()
+              .ifPresent(average -> System.out.println("  - Moyenne de la note des critiques : " + average));
+        });
+    // Grouper les livres par genre ✅
+    // Afficher le nombre de livres ✅
+    // et la moyenne ✅
   }
 
 }

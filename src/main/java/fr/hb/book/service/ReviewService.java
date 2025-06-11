@@ -26,4 +26,13 @@ public class ReviewService {
     System.out.println("Liste des critiques de " + author + " triées par date décroissante :" + reviewAuthorSort);
   }
 
+  public void getAverageRatingByBook() {
+    reviews.stream()
+        .filter(review -> review.getNote() > 0)
+        .mapToDouble(review -> review.getNote())
+        .average()
+        .ifPresent(average -> System.out.println("Moyenne de la note des critiques : " + average));
+
+  }
+
 }
