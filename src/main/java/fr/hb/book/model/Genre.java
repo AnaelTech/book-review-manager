@@ -1,0 +1,22 @@
+package fr.hb.book.model;
+
+public enum Genre {
+  SCIENCE_FICTION,
+  FANTASY,
+  POLICIER,
+  ROMANCE,
+  NOVEL,
+  NON_FICTION,
+  AUTOR,
+  COMEDIE,
+  DRAME,
+  HISTOIRE,
+  LIVRE,
+  POETE,
+  PSYCHOLOGIE,
+  SAGA,
+  SCOLAIRE,
+  SPORT,
+  TELEVISION,
+  VIE,
+}
