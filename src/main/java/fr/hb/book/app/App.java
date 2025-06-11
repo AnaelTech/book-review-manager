@@ -12,7 +12,7 @@ public class App {
     // reviewService.getAverageRatingByBook();
 
     // bookService.displayBooksSortedByAverageRating();
-    bookService.findBestBooksByGenre();
+    // bookService.findBestBooksByGenre();
     // bookService.filterBooksPublishedBeforeYearAndShowReviews(2000);
     // System.out.println("==================================================================");
     // bookService.groupBooksByGenreAndShowCountAndAverageRating();

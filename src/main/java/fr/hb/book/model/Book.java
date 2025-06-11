@@ -7,7 +7,6 @@ public class Book {
   private String author;
   private int year;
   private Genre genre;
-  private Long compteur = 0L;
 
   public Book(int id, String title, String author, int year, Genre genre) {
     this.id = id;

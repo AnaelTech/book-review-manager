@@ -19,13 +19,24 @@ public class BookService {
    * @param books the list of books
    */
   public void displayBooksSortedByAverageRating() {
-    books.stream();
-    // Rechercher la note moyenne de chaque livre dasns la liste de reviews
+    List<Book> sortedBooks = books.stream()
+        .sorted((b1, b2) -> {
+          double avg1 = reviews.stream().filter(r -> r.getBook_id() == b1.getId()).mapToDouble(Review::getNote)
+              .average().orElse(0.0);
+          double avg2 = reviews.stream().filter(r -> r.getBook_id() == b2.getId()).mapToDouble(Review::getNote)
+              .average().orElse(0.0);
+          return Double.compare(avg2, avg1);
+        })
+        .collect(Collectors.toList());
 
-    // Trier par note moyenne
-
-    // Afficher les données
-
+    for (Book book : sortedBooks) {
+      double averageRating = reviews.stream()
+          .filter(r -> r.getBook_id() == book.getId())
+          .mapToDouble(Review::getNote)
+          .average()
+          .orElse(0.0);
+      System.out.println("Livre: " + book.getTitle() + ", Note moyenne: " + averageRating);
+    }
   }
 
   /**
@@ -34,9 +45,16 @@ public class BookService {
    * @param books the list of books
    */
   public void findBestBooksByGenre() {
-    books.stream();
-    // Trier par note moyenne
-    // Et Sortir le meilleur genre
+    books.stream()
+        .collect(Collectors.groupingBy(Book::getGenre))
+        .forEach((genre, books) -> {
+          reviews.stream()
+              .filter(review -> review.getBook_id() == books.get(0).getId())
+              .mapToDouble(review -> review.getNote())
+              .average()
+              .ifPresent(average -> System.out.println(
+                  "Genre: " + genre + ", Meilleur livre: " + books.get(0).getTitle() + ", Note moyenne: " + average));
+        });
   }
 
   /**
@@ -56,9 +74,6 @@ public class BookService {
               .forEach(
                   review -> System.out.println("  - " + review.getCommentaire()));
         });
-
-    // Filtrer les livres publiés avant une année ✅
-    // Afficher les critiques
   }
 
   /**
@@ -78,9 +93,6 @@ public class BookService {
               .average()
               .ifPresent(average -> System.out.println("  - Moyenne de la note des critiques : " + average));
         });
-    // Grouper les livres par genre ✅
-    // Afficher le nombre de livres ✅
-    // et la moyenne ✅
   }
 
 }
